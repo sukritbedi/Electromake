@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../css/admin.css">
+    <script type="text/javascript" src="../js/admin.js">
+
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title></title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="col-md-3">
+        <div class="logo">
+          <h1>ISA Electromake</h1>
+          <h2>Admin Page</h2>
+        </div>
+        <div class="teamName">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <button type="button" class="btn btn-success lg buttonAdmin" onclick=addTeam()>Add Team</button>
+        <button type="button" class="btn btn-primary lg buttonAdmin" onclick=editTeam()>Edit Details</button><br>
+        <button type="button" class="btn btn-danger lg buttonAdmin" onclick=removeTeam()>Remove Team</button>
+        <div class="dropdown" style="top: 64px; left: 113px;">
+          <button class="dropbtn buttonAdmin">Components</button>
+          <div class="dropdown-content">
+            <span onclick="viewComp()">View Components</span>
+            <span onclick="addComp()">Add Components</span>
+            <span onclick="editComp()">Edit Components</span>
+            <span onclick="removeComp()">Remove Components</span>
+          </div>
+        </div><br>
+        <button type="button" class="btn btn-warning lg buttonAdmin" onclick=changePass()>Change Password</button>
+      </div>
+    </div>
+
+    <div id="viewTeam">
+
+    </div>
+
+    <div id="addTeam1" class="modal">
+      <form class="modal-content animate" action="action2.php">
+        <div class="container"><br>
+          <span onclick="document.getElementById('addTeam1').style.display='none'" class="close" title="Close Modal">&times;</span>
+	    		<label for="uname"><b>Username</b></label><br>
+	    		<input type="text" placeholder="Enter Username" name="uname" required><br>
+
+	    		<label for="psw"><b>Password</b></label><br>
+	    		<input type="password" placeholder="Enter Password" name="psw" required><br>
+
+          <label for="repsw"><b>Re-enter Password</b></label><br>
+          <input type="password" placeholder="Enter Password Again" name="repsw" required><br>
+
+          <label for="name"><b>Team Leader's Name</b></label><br>
+	    		<input type="text" placeholder="Enter Name of Team Leader" name="name" required><br>
+
+          <label for="num"><b>Team Members</b></label><br>
+	    		<input type="text" placeholder="Enter number of Team Members( including Team Leader )" name='num' required><br>
+
+	    		<button type="submit" class="button1">Add Team</button>
+	    	</div>
+      </form>
+    </div>
+
+    <div id="editTeam1" class="modal">
+      <form class="modal-content animate" action="action1.php">
+        <div class="container"><br>
+          <span onclick="document.getElementById('editTeam1').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+          <label for="name"><b>Team Leader's Name</b></label><br>
+	    		<input type="text" placeholder="Enter Name of Team Leader" name="name" required><br>
+
+	    		<label for="uname"><b>Username</b></label><br>
+	    		<input type="text" placeholder="Enter Username" name="uname" required><br>
+
+	    		<label for="psw"><b>Your Password</b></label><br>
+	    		<input type="password" placeholder="Enter your ISA Token Key" name="psw" required><br>
+
+          <label for="money"><b>Money</b></label><br>
+	    		<input type="text" placeholder="Enter Updated money" name='money' required><br>
+
+          <label for="num"><b>Team Members</b></label><br>
+	    		<input type="text" placeholder="Enter number of Team Members( including Team Leader )" name='num' required><br>
+
+	    		<button type="submit" class="button1" id="edit">Edit Team Details</button>
+	    	</div>
+      </form>
+    </div>
+
+    <div id="removeTeam1" class="modal">
+      <form class="modal-content animate" action="action.php">
+        <div class="container"><br>
+          <span onclick="document.getElementById('removeTeam1').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+          <label for="name"><b>Team Leader's Name</b></label><br>
+	    		<input type="text" placeholder="Enter Name of Team Leader" name="name" required><br>
+
+	    		<label for="uname"><b>Username</b></label><br>
+	    		<input type="text" placeholder="Enter Username" name="uname" required><br>
+
+	    		<label for="psw"><b>Password</b></label><br>
+	    		<input type="password" placeholder="Enter ISA Token Key" name="psw" required><br>
+
+          <label for="repsw"><b>Re-enter Password</b></label><br>
+          <input type="password" placeholder="Enter ISA Token Key Again" name="repsw" required><br>
+
+	    		<button type="submit" class="button1" id="rem">Remove Team</button>
+	    	</div>
+      </form>
+    </div>
+
+    <div id="viewComp" class="modal">
+
+    </div>
+    
+    <div id="addComp1" class="modal">
+      <form class="modal-content animate" action="action.php">
+        <div class="container"><br>
+          <span onclick="document.getElementById('addComp1').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+          <label for="name"><b>Component's Name</b></label><br>
+	    		<input type="text" placeholder="Enter Name of Component" name="name" required><br>
+
+	    		<label for="uname"><b>Component's Cost</b></label><br>
+	    		<input type="text" placeholder="Enter Component's Cost" name="cost" required><br>
+
+	    		<button type="submit" class="button1" >Add Component</button>
+	    	</div>
+      </form>
+    </div>
+
+    <div id="editComp1" class="modal">
+      <form class="modal-content animate" action="action.php">
+        <div class="container"><br>
+          <span onclick="document.getElementById('editComp1').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+          <label for="name"><b>Component's Name</b></label><br>
+	    		<input type="text" placeholder="Enter Name of Component" name="name" required><br>
+
+	    		<label for="uname"><b>Component's Cost</b></label><br>
+	    		<input type="text" placeholder="Enter Component's Cost" name="cost" required><br>
+
+	    		<button type="submit" class="button1" >Add Component</button>
+	    	</div>
+      </form>
+    </div>
+
+    <div id="remComp1" class="modal">
+      <form class="modal-content animate" action="action.php">
+        <div class="container"><br>
+          <span onclick="document.getElementById('remComp1').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+          <label for="name"><b>Component's Name</b></label><br>
+	    		<input type="text" placeholder="Enter Name of Component" name="name" required><br>
+
+	    		<label for="uname"><b>Your Password</b></label><br>
+	    		<input type="text" placeholder="Enter ISA Token Key Again" name="cost" required><br>
+
+	    		<button type="submit" class="button1" id="rem">Remove Component</button>
+	    	</div>
+      </form>
+    </div>
+
+  </body>
+</html>
