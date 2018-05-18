@@ -27,8 +27,6 @@ input[type=text], input[type=password] {
 
 .buttonAdmin {
   margin: 13.5% 18%;
-
-
 }
 
  .button1 {
@@ -43,7 +41,7 @@ input[type=text], input[type=password] {
     margin-left: 10px;
 }
 
-#rem{
+.rem{
   background-color: red;
 }
 
@@ -171,4 +169,14 @@ span.psw {
 
 .dropdown:hover .dropbtn {
     background-color: #24c0f5 ;
+}
+
+.teamName li{
+}
+
+#teams{
+    margin-left: 106px;
+    margin-top: 50px;
+    margin: 50px 0 0 110px;
+    line-height: 25px;  
 }

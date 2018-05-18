@@ -41,3 +41,8 @@ function editComp() {
 function removeComp() {
 	document.getElementById('remComp1').style.display='block'
 }
+
+function teamview(param1) {
+	console.log(param1);
+	document.getElementById('teamview1').style.display='block'
+}

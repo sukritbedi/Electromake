@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -9,17 +9,27 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="../js/angular_admin.js">
+
+    </script>
+
     <title></title>
   </head>
-  <body>
+  <body ng-app="myApp" ng-controller="GetUsers">
     <div class="container-fluid">
       <div class="col-md-3">
         <div class="logo">
           <h1>ISA Electromake</h1>
           <h2>Admin Page</h2>
         </div>
-        <div class="teamName">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div class="teamName" id="teams">
+          <li ng-repeat="user in users">
+            <span onclick="teamview()">{{ user.team_name }}</span>
+              <script>
+                var teamid = "{{user.user_id}}";
+              </script>
+          </li>
         </div>
       </div>
 
@@ -44,26 +54,26 @@
 
     </div>
 
-    <div id="addTeam1" class="modal">
-      <form class="modal-content animate" action="action2.php">
+    <div id="addTeam1" class="modal" >
+      <form class="modal-content animate">
         <div class="container"><br>
           <span onclick="document.getElementById('addTeam1').style.display='none'" class="close" title="Close Modal">&times;</span>
 	    		<label for="uname"><b>Username</b></label><br>
-	    		<input type="text" placeholder="Enter Username" name="uname" required><br>
+	    		<input type="text" placeholder="Enter Username" ng-model="user_id" required><br>
 
 	    		<label for="psw"><b>Password</b></label><br>
-	    		<input type="password" placeholder="Enter Password" name="psw" required><br>
+	    		<input type="password" placeholder="Enter Password" ng-model="user_password" required><br>
 
           <label for="repsw"><b>Re-enter Password</b></label><br>
-          <input type="password" placeholder="Enter Password Again" name="repsw" required><br>
+          <input type="password" placeholder="Enter Password Again" required><br>
 
           <label for="name"><b>Team Leader's Name</b></label><br>
-	    		<input type="text" placeholder="Enter Name of Team Leader" name="name" required><br>
+	    		<input type="text" placeholder="Enter Name of Team Leader" ng-model = "team_leader" required><br>
 
           <label for="num"><b>Team Members</b></label><br>
-	    		<input type="text" placeholder="Enter number of Team Members( including Team Leader )" name='num' required><br>
+	    		<input type="text" placeholder="Enter number of Team Members( including Team Leader )" ng-model="memberNum" required><br>
 
-	    		<button type="submit" class="button1">Add Team</button>
+	    		<button type="submit" class="button1" ng-click="insertdata()">Add Team</button>
 	    	</div>
       </form>
     </div>
@@ -110,15 +120,14 @@
           <label for="repsw"><b>Re-enter Password</b></label><br>
           <input type="password" placeholder="Enter ISA Token Key Again" name="repsw" required><br>
 
-	    		<button type="submit" class="button1" id="rem">Remove Team</button>
+	    		<button type="submit" class="button1 rem">Remove Team</button>
 	    	</div>
       </form>
     </div>
 
     <div id="viewComp" class="modal">
-
     </div>
-    
+
     <div id="addComp1" class="modal">
       <form class="modal-content animate" action="action.php">
         <div class="container"><br>
@@ -162,10 +171,23 @@
 	    		<label for="uname"><b>Your Password</b></label><br>
 	    		<input type="text" placeholder="Enter ISA Token Key Again" name="cost" required><br>
 
-	    		<button type="submit" class="button1" id="rem">Remove Component</button>
+	    		<button type="submit" class="button1 rem">Remove Component</button>
 	    	</div>
       </form>
     </div>
+
+    <div id="teamview1" class="modal">
+      <script type="text/javascript">
+        console.log(teamid);
+      </script>
+      <form class="modal-content animate">
+        <div class="container"><br>
+          <span onclick="document.getElementById('teamview1').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+          <label for="name"><b>Team Leader's Name</b></label><br>
+	    		   {{user.team_name}}<br>
+
+	    	</div>
 
   </body>
 </html>
