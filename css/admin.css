@@ -1,5 +1,5 @@
 input[type=text], input[type=password] {
-   width: 30%;
+   width: 100%;
    padding: 12px 20px;
    margin: 8px 0;
    display: inline-block;
@@ -38,11 +38,14 @@ input[type=text], input[type=password] {
     cursor: pointer;
     width: 30%;
     align-items: center;
-    margin-left: 10px;
+    margin-right: 57%;
+    margin-left: 0px;
+
 }
 
 .rem{
   background-color: red;
+  width:auto;
 }
 
 #edit{
@@ -92,7 +95,7 @@ span.psw {
 .close {
     position: absolute;
     right: 25px;
-    top: 0;
+    top: 9px;
     color: #000;
     font-size: 35px;
     font-weight: bold;
@@ -178,5 +181,11 @@ span.psw {
     margin-left: 106px;
     margin-top: 50px;
     margin: 50px 0 0 110px;
-    line-height: 25px;  
+    line-height: 25px;
+}
+
+#removeTeam1 table, tr, td{
+  border:1px solid black;
+  padding:5px;
+  border-spacing: 5px;
 }

@@ -6,66 +6,60 @@
     <script type="text/javascript" src="../js/admin.js">
 
     </script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-    <script src="../js/angular_admin.js">
-
-    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
+    <script src="../js/angular_admin.js"></script>
 
     <title></title>
   </head>
-  <body ng-app="myApp" ng-controller="GetUsers">
+  <body ng-app="myApp" >
     <div class="container-fluid">
       <div class="col-md-3">
         <div class="logo">
           <h1>ISA Electromake</h1>
           <h2>Admin Page</h2>
         </div>
-        <div class="teamName" id="teams">
-          <li ng-repeat="user in users">
-            <span onclick="teamview()">{{ user.team_name }}</span>
-              <script>
-                var teamid = "{{user.user_id}}";
-              </script>
+        <div class="teamName" id="teams" ng-controller="GetUsers" style="overflow:scroll;">
+          <li ng-repeat="user in users" ng-click="teamview(user.user_id)">
+            {{user.user_id}}
           </li>
         </div>
       </div>
 
       <div class="col-md-9">
-        <button type="button" class="btn btn-success lg buttonAdmin" onclick=addTeam()>Add Team</button>
-        <button type="button" class="btn btn-primary lg buttonAdmin" onclick=editTeam()>Edit Details</button><br>
-        <button type="button" class="btn btn-danger lg buttonAdmin" onclick=removeTeam()>Remove Team</button>
+        <button type="button" class="btn btn-success btn-lg buttonAdmin" data-toggle="modal" data-target="#addTeamModal">Add Team</button>
+        <button type="button" class="btn btn-primary btn-lg buttonAdmin" data-toggle="modal" data-target="#updateTeamModal">Edit Details</button><br>
+        <button type="button" class="btn btn-danger btn-lg buttonAdmin" data-toggle="modal" data-target="#removeTeamModal">Remove Team</button>
         <div class="dropdown" style="top: 64px; left: 113px;">
-          <button class="dropbtn buttonAdmin">Components</button>
+          <button class="btn dropbtn buttonAdmin btn-lg">Components</button>
           <div class="dropdown-content">
-            <span onclick="viewComp()">View Components</span>
-            <span onclick="addComp()">Add Components</span>
+            <span data-toggle="modal" data-target="#viewCompModal">View Components</span>
+            <span data-toggle="modal" data-target="#addCompModal">Add Components</span>
             <span onclick="editComp()">Edit Components</span>
-            <span onclick="removeComp()">Remove Components</span>
+            <span data-toggle="modal" data-target="#remCompModal">Remove Components</span>
           </div>
         </div><br>
-        <button type="button" class="btn btn-warning lg buttonAdmin" onclick=changePass()>Change Password</button>
+        <button type="button" class="btn btn-warning btn-lg buttonAdmin" data-toggle="modal" data-target="#changePassword">Change Password</button>
+        <span ng-click=teamview(user.user_id)>{{ user.team_name }}</span>
+        <br><br><br><br><p>&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p>
       </div>
     </div>
 
-    <div id="viewTeam">
-
-    </div>
-
-    <div id="addTeam1" class="modal" >
-      <form class="modal-content animate">
-        <div class="container"><br>
-          <span onclick="document.getElementById('addTeam1').style.display='none'" class="close" title="Close Modal">&times;</span>
-	    		<label for="uname"><b>Username</b></label><br>
+    <div class="modal fade" id="addTeamModal" role="dialog" ng-controller="addUser">
+    <div class="modal-dialog">
+      <div class="modal-content" style="margin-left: 0px;margin-right: 0px;width:100%;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Teams</h4>
+        </div>
+        <div class="modal-body">
+          <label for="uname"><b>Username</b></label><br>
 	    		<input type="text" placeholder="Enter Username" ng-model="user_id" required><br>
 
 	    		<label for="psw"><b>Password</b></label><br>
 	    		<input type="password" placeholder="Enter Password" ng-model="user_password" required><br>
-
-          <label for="repsw"><b>Re-enter Password</b></label><br>
-          <input type="password" placeholder="Enter Password Again" required><br>
 
           <label for="name"><b>Team Leader's Name</b></label><br>
 	    		<input type="text" placeholder="Enter Name of Team Leader" ng-model = "team_leader" required><br>
@@ -73,121 +67,228 @@
           <label for="num"><b>Team Members</b></label><br>
 	    		<input type="text" placeholder="Enter number of Team Members( including Team Leader )" ng-model="memberNum" required><br>
 
-	    		<button type="submit" class="button1" ng-click="insertdata()">Add Team</button>
-	    	</div>
-      </form>
+          <label for="phnum"><b>Phone Number</b></label><br>
+	    		<input type="text" placeholder="Enter a WhatsApp number of any TeamMate" ng-model="phoneNum" required><br>
+        </div>
+        <div class="modal-footer">
+          <p>&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p><br>
+          <button type="submit" class="button1" ng-click="addTeamNew()">Add Team</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="modal fade" id="updateTeamModal" role="dialog" ng-controller='updateUser'>
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="margin-left: 0px;margin-right: 0px;width: 100%;">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Update Team Details</h4>
+          </div>
+          <div class="modal-body table-responsive">
+              <table class="table table-hover" ng-hide="Update">
+                <thead>
+                  <th>User ID</th>
+                  <th>Password</th>
+                  <th>Team Name</th>
+                  <th>Money</th>
+                  <th>Member Number</th>
+                  <th>Phone Number</th>
+                  <th></th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="user in users">
+                    <td>{{user.user_id}}</td>
+                    <td>{{user.user_pass}}</td>
+                    <td>{{user.team_name}}</td>
+                    <td>{{user.money}}</td>
+                    <td>{{user.team_members}}</td>
+                    <td>{{user.phone_num}}</td>
+                    <td><button type="button" class="btn btn-info btn-xs buttonAdmin" style="align:center;" ng-click="UpdateTeam(user.user_id,user.team_name,user.money,user.team_members,user.phone_num)">Update Details</button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div ng-show="Update">
+                <label><b>User ID</b></label><br>
+      	    		<input type="text" name="userid" ng-model="userid" class="form-control" disabled><br>
+                <label><b>Team Name</b></label><br>
+      	    		<input type="text" name="teamname" ng-model="teamname" class="form-control"><br>
+                <label><b>Money</b></label><br>
+      	    		<input type="text" name="money" ng-model="money" class="form-control"><br>
+                <label><b>Team Members</b></label><br>
+      	    		<input type="text" name="teammemb" ng-model="team_members" class="form-control"><br>
+                <label><b>Phone Number</b></label><br>
+      	    		<input type="text" name="phonenum" ng-model="phonenum" class="form-control"><br>
+                <input type="submit" name="btnInsert" class="btn btn-info" ng-click="updateData()">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <p>&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div id="editTeam1" class="modal">
-      <form class="modal-content animate" action="action1.php">
-        <div class="container"><br>
-          <span onclick="document.getElementById('editTeam1').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <div class="modal fade" id="removeTeamModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content" style="width:75%;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Remove Team</h4>
+        </div>
+        <div class="modal-body" ng-controller="removeUser">
+          <table class="table table-hover">
+            <thead>
+              <th>Team Name</th>
+              <th>Delete</th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="user in users">
+                <td>{{user.team_name}}</td>
+                <td><button type="button" class="btn btn-danger btn-xs buttonAdmin" ng-click=deleteTeam(user.user_id) style="align:center">Remove Team</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <p>&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
 
-          <label for="name"><b>Team Leader's Name</b></label><br>
-	    		<input type="text" placeholder="Enter Name of Team Leader" name="name" required><br>
-
-	    		<label for="uname"><b>Username</b></label><br>
-	    		<input type="text" placeholder="Enter Username" name="uname" required><br>
-
-	    		<label for="psw"><b>Your Password</b></label><br>
-	    		<input type="password" placeholder="Enter your ISA Token Key" name="psw" required><br>
-
-          <label for="money"><b>Money</b></label><br>
-	    		<input type="text" placeholder="Enter Updated money" name='money' required><br>
-
-          <label for="num"><b>Team Members</b></label><br>
-	    		<input type="text" placeholder="Enter number of Team Members( including Team Leader )" name='num' required><br>
-
-	    		<button type="submit" class="button1" id="edit">Edit Team Details</button>
-	    	</div>
-      </form>
     </div>
+  </div>
 
-    <div id="removeTeam1" class="modal">
-      <form class="modal-content animate" action="action.php">
-        <div class="container"><br>
-          <span onclick="document.getElementById('removeTeam1').style.display='none'" class="close" title="Close Modal">&times;</span>
-
-          <label for="name"><b>Team Leader's Name</b></label><br>
-	    		<input type="text" placeholder="Enter Name of Team Leader" name="name" required><br>
-
-	    		<label for="uname"><b>Username</b></label><br>
-	    		<input type="text" placeholder="Enter Username" name="uname" required><br>
-
-	    		<label for="psw"><b>Password</b></label><br>
-	    		<input type="password" placeholder="Enter ISA Token Key" name="psw" required><br>
-
-          <label for="repsw"><b>Re-enter Password</b></label><br>
-          <input type="password" placeholder="Enter ISA Token Key Again" name="repsw" required><br>
-
-	    		<button type="submit" class="button1 rem">Remove Team</button>
-	    	</div>
-      </form>
+  <div class="modal fade" id="viewCompModal" role="dialog" ng-controller='viewComp'>
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" style="margin-left:auto;margin-right:auto;width:50%;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">View Components Details</h4>
+        </div>
+        <div class="modal-body table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <th>Component Name</th>
+                <th>Component Cost</th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="comp in components">
+                  <td>{{comp.comp_name}}</td>
+                  <td>{{comp.cost}}</td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+        <div class="modal-footer">
+          <p>&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div id="viewComp" class="modal">
-    </div>
-
-    <div id="addComp1" class="modal">
-      <form class="modal-content animate" action="action.php">
-        <div class="container"><br>
-          <span onclick="document.getElementById('addComp1').style.display='none'" class="close" title="Close Modal">&times;</span>
-
+  <div class="modal fade" id="addCompModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content" style="width:90%" ng-controller="addComponents">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Components</h4>
+        </div>
+        <div class="modal-body">
           <label for="name"><b>Component's Name</b></label><br>
-	    		<input type="text" placeholder="Enter Name of Component" name="name" required><br>
+          <input type="text" placeholder="Enter Name of Component" name="name" required ng-model="compName"><br>
+          <label for="uname"><b>Component's Cost</b></label><br>
+          <input type="text" placeholder="Enter Component's Cost" name="cost" required ng-model="compCost"><br>
+        </div>
+        <div class="modal-footer">
+          <p>&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p>
+          <button type="submit" class="button1" ng-click=addCompNew()>Add Component</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-	    		<label for="uname"><b>Component's Cost</b></label><br>
-	    		<input type="text" placeholder="Enter Component's Cost" name="cost" required><br>
+  <div id="editComp1">
 
-	    		<button type="submit" class="button1" >Add Component</button>
-	    	</div>
-      </form>
+  </div>
+
+  <div class="modal fade" id="remCompModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content" style="width:100%;">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Remove Components</h4>
+        </div>
+        <div class="modal-body" ng-controller="removeComp">
+          <table class="table table-hover">
+            <thead>
+              <th>Team Name</th>
+              <th>Delete</th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="comp in components">
+                <td>{{comp.comp_name}}</td>
+                <td><button type="button" class="btn btn-danger btn-xs buttonAdmin" ng-click=deleteComp(comp.comp_name) style="align:center">Remove Component</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <p>&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="modal fade" id="changePassword" role="dialog" ng-controller='chngPswrd'>
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="margin-left:auto; margin-right:auto; width:65%;">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Change Password</h4>
+          </div>
+          <div class="modal-body">
+            <label for="sel1">Select list (select one):</label>
+            <select class="form-control" id="sel1">
+              <option ng-repeat="user in  users">{{user.user_id}}</option>
+            </select><br><br>
+            <label>Add New Password: </label><br>
+            <input type="text" placeholder="Enter New Password" ng-model="pass_change">
+          </div>
+          <div class="modal-footer">
+            <p>&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div id="editComp1" class="modal">
-      <form class="modal-content animate" action="action.php">
-        <div class="container"><br>
-          <span onclick="document.getElementById('editComp1').style.display='none'" class="close" title="Close Modal">&times;</span>
-
-          <label for="name"><b>Component's Name</b></label><br>
-	    		<input type="text" placeholder="Enter Name of Component" name="name" required><br>
-
-	    		<label for="uname"><b>Component's Cost</b></label><br>
-	    		<input type="text" placeholder="Enter Component's Cost" name="cost" required><br>
-
-	    		<button type="submit" class="button1" >Add Component</button>
-	    	</div>
-      </form>
-    </div>
-
-    <div id="remComp1" class="modal">
-      <form class="modal-content animate" action="action.php">
-        <div class="container"><br>
-          <span onclick="document.getElementById('remComp1').style.display='none'" class="close" title="Close Modal">&times;</span>
-
-          <label for="name"><b>Component's Name</b></label><br>
-	    		<input type="text" placeholder="Enter Name of Component" name="name" required><br>
-
-	    		<label for="uname"><b>Your Password</b></label><br>
-	    		<input type="text" placeholder="Enter ISA Token Key Again" name="cost" required><br>
-
-	    		<button type="submit" class="button1 rem">Remove Component</button>
-	    	</div>
-      </form>
-    </div>
-
-    <div id="teamview1" class="modal">
+    <div id="teamview1" class="modal" ng-controller="GetUsers">
       <script type="text/javascript">
-        console.log(teamid);
       </script>
       <form class="modal-content animate">
         <div class="container"><br>
           <span onclick="document.getElementById('teamview1').style.display='none'" class="close" title="Close Modal">&times;</span>
-
-          <label for="name"><b>Team Leader's Name</b></label><br>
-	    		   {{user.team_name}}<br>
-
+          <table>
+            <thead>
+              <tr>
+                <th>Emp</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="data in team_data">
+                <td>1234</td>
+                <td>{{data.user_pass}} 1234</td>
+              </tr>
+            </tbody>
+          </table>
 	    	</div>
-
+      </form>
+    </div>
   </body>
 </html>
