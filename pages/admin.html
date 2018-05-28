@@ -21,8 +21,9 @@
           <h1>ISA Electromake</h1>
           <h2>Admin Page</h2>
         </div>
-        <div class="teamName" id="teams" ng-controller="GetUsers" style="overflow:scroll;">
-          <li ng-repeat="user in users" ng-click="teamview(user.user_id)">
+        <div class="teamName" id="teams" ng-controller="GetUsers">
+          <h4><b><u>User ID's</u></b></h4>
+          <li ng-repeat="user in users" ng-click="teamview(user.user_id,user.user_pass,user.team_name,user.money,user.team_members,user.phone_num)">
             {{user.user_id}}
           </li>
         </div>
@@ -30,14 +31,14 @@
 
       <div class="col-md-9">
         <button type="button" class="btn btn-success btn-lg buttonAdmin" data-toggle="modal" data-target="#addTeamModal">Add Team</button>
-        <button type="button" class="btn btn-primary btn-lg buttonAdmin" data-toggle="modal" data-target="#updateTeamModal">Edit Details</button><br>
+        <button type="button" class="btn btn-primary btn-lg buttonAdmin" data-toggle="modal" data-target="#updateTeamModal">Update Team</button><br>
         <button type="button" class="btn btn-danger btn-lg buttonAdmin" data-toggle="modal" data-target="#removeTeamModal">Remove Team</button>
         <div class="dropdown" style="top: 64px; left: 113px;">
           <button class="btn dropbtn buttonAdmin btn-lg">Components</button>
           <div class="dropdown-content">
             <span data-toggle="modal" data-target="#viewCompModal">View Components</span>
             <span data-toggle="modal" data-target="#addCompModal">Add Components</span>
-            <span onclick="editComp()">Edit Components</span>
+            <span data-toggle="modal" data-target="#updateCompModal">Update Components</span>
             <span data-toggle="modal" data-target="#remCompModal">Remove Components</span>
           </div>
         </div><br>
@@ -89,16 +90,16 @@
           <div class="modal-body table-responsive">
               <table class="table table-hover" ng-hide="Update">
                 <thead>
-                  <th>User ID</th>
-                  <th>Password</th>
-                  <th>Team Name</th>
-                  <th>Money</th>
-                  <th>Member Number</th>
-                  <th>Phone Number</th>
+                  <th ng-click="sortItem('user_id')">User ID</th>
+                  <th ng-click="sortItem('user_pass')">Password</th>
+                  <th ng-click="sortItem('team_name')">Team Name</th>
+                  <th ng-click="sortItem('money')">Money</th>
+                  <th ng-click="sortItem('team_members')">Member Number</th>
+                  <th ng-click="sortItem('phone_num')">Phone Number</th>
                   <th></th>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="user in users">
+                  <tr ng-repeat="user in users | orderBy:sortby:reverseSort">
                     <td>{{user.user_id}}</td>
                     <td>{{user.user_pass}}</td>
                     <td>{{user.team_name}}</td>
@@ -115,7 +116,7 @@
                 <label><b>Team Name</b></label><br>
       	    		<input type="text" name="teamname" ng-model="teamname" class="form-control"><br>
                 <label><b>Money</b></label><br>
-      	    		<input type="text" name="money" ng-model="money" class="form-control"><br>
+                <input type="text" name="money" ng-model="money" class="form-control"><br>
                 <label><b>Team Members</b></label><br>
       	    		<input type="text" name="teammemb" ng-model="team_members" class="form-control"><br>
                 <label><b>Phone Number</b></label><br>
@@ -133,7 +134,7 @@
 
     <div class="modal fade" id="removeTeamModal" role="dialog">
     <div class="modal-dialog">
-      <div class="modal-content" style="width:75%;">
+      <div class="modal-content" style="width:85%;">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Remove Team</h4>
@@ -145,7 +146,7 @@
               <th>Delete</th>
             </thead>
             <tbody>
-              <tr ng-repeat="user in users">
+              <tr ng-repeat='user in users'>
                 <td>{{user.team_name}}</td>
                 <td><button type="button" class="btn btn-danger btn-xs buttonAdmin" ng-click=deleteTeam(user.user_id) style="align:center">Remove Team</button></td>
               </tr>
@@ -160,6 +161,7 @@
 
     </div>
   </div>
+  <tr ng-repeat="user in users">
 
   <div class="modal fade" id="viewCompModal" role="dialog" ng-controller='viewComp'>
     <div class="modal-dialog modal-lg">
@@ -212,9 +214,46 @@
     </div>
   </div>
 
-  <div id="editComp1">
+  <div class="modal fade" id="updateCompModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" style="width:90%">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Update Components</h4>
+        </div>
+        <div class="modal-body" ng-controller="updateComp">
+          <div class="modal-body table-responsive">
+              <table class="table table-hover" ng-hide="Update">
+                <thead>
+                  <th ng-click="sortItem('comp_name')">Component Name</th>
+                  <th ng-click="sortItem('cost')">Cost</th>
+                  <th></th>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="comp in comps | orderBy:sortby:reverseSort">
+                    <td>{{comp.comp_name}}</td>
+                    <td>{{comp.cost}}</td>
+                    <td><button type="button" class="btn btn-info btn-xs buttonAdmin" style="align:center;" ng-click="UpdateComp(comp.comp_name,comp.cost)">Update Details</button></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div ng-show="Update">
+                <label><b>Component Name</b></label><br>
+      	    		<input type="text" name="compname" ng-model="comp_name" class="form-control" disabled><br>
+                <label><b>Cost</b></label><br>
+      	    		<input type="text" name="cost" ng-model="cost" class="form-control"><br>
+                <input type="submit" name="btnInsert" class="btn btn-info" ng-click="updateData()">
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
 
+    </div>
   </div>
+
 
   <div class="modal fade" id="remCompModal" role="dialog">
     <div class="modal-dialog">
@@ -254,7 +293,7 @@
           </div>
           <div class="modal-body">
             <label for="sel1">Select list (select one):</label>
-            <select class="form-control" id="sel1">
+            <select class="form-control" ng-model="sel1">
               <option ng-repeat="user in  users">{{user.user_id}}</option>
             </select><br><br>
             <label>Add New Password: </label><br>
@@ -262,33 +301,11 @@
           </div>
           <div class="modal-footer">
             <p>&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p>
+            <input type="submit" name="btnInsert" class="btn btn-info" ng-click="changePass(sel1,pass_change)">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
-    </div>
-
-    <div id="teamview1" class="modal" ng-controller="GetUsers">
-      <script type="text/javascript">
-      </script>
-      <form class="modal-content animate">
-        <div class="container"><br>
-          <span onclick="document.getElementById('teamview1').style.display='none'" class="close" title="Close Modal">&times;</span>
-          <table>
-            <thead>
-              <tr>
-                <th>Emp</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="data in team_data">
-                <td>1234</td>
-                <td>{{data.user_pass}} 1234</td>
-              </tr>
-            </tbody>
-          </table>
-	    	</div>
-      </form>
     </div>
   </body>
 </html>

@@ -1,5 +1,5 @@
 var app = angular.module('myApp',[])
-								 .controller('GetUsers',function($scope,$http,$interval){
+								 .controller('GetUsers',function($scope,$http,$interval,$window){
 
 									  var auto = $interval(function() {
 											$http.get('../php/view_Team.php')
@@ -7,18 +7,6 @@ var app = angular.module('myApp',[])
 					  						$scope.users = data;
 						 					})
 									  },100);
-
-										$scope.teamview = function(user_id){
-											$http({
-												method:'post',
-												url:'../php/modal_Team.php',
-												data:{'user_id':user_id}
-											})
-											.success(function(data) {
-												$scope.team_data = data;
-												console.log($scope.team_data);
-										})
-									}
 								})
 
 								.controller('addUser',function($scope,$http) {
@@ -59,8 +47,13 @@ var app = angular.module('myApp',[])
 
 								.controller('updateUser', function($scope,$http,$interval){
 									$scope.Update = false;
+									$scope.reverseSort = false;
+									$scope.sortby = 'user_id';
 									var auto = $interval(function() {
-										$http.get('../php/view_Team.php')
+										$http({
+											method:'get',
+											url:'../php/view_Team.php',
+										})
 											.success(function(data) {
 											$scope.users = data;
 										})
@@ -84,17 +77,36 @@ var app = angular.module('myApp',[])
 											alert(data);
 										})
 										$scope.Update = false;
-									};
+									}
+
+									$scope.sortItem = function(xyz) {
+										if (xyz == $scope.sortby) {
+											$scope.reverseSort = !$scope.reverseSort;
+										}
+										$scope.sortby = xyz;
+									}
 								})
 
 
 								.controller('chngPswrd', function($scope,$http,$interval) {
 									$http.get('../php/view_Team.php')
 										.success(function(data) {
-										// here the data from the api is assigned to a variable named users
-										console.log(data);
+										//console.log(data);
 										$scope.users = data;
 									})
+
+									$scope.changePass = function(team,pass) {
+										$scope.team_name = team;
+										$scope.pass = pass;
+										$http({
+											method:'post',
+											url: '../php/changeTeam.php',
+											data: {'team_name':$scope.team_name,'pass':$scope.pass}
+										})
+										.success(function(data){
+											alert(data);
+										})
+									}
 								})
 
 
@@ -120,6 +132,46 @@ var app = angular.module('myApp',[])
 											})
 										}
 									)
+									})
+
+									.controller('updateComp', function($scope,$http,$interval){
+										$scope.Update = false;
+										$scope.reverseSort = false;
+										$scope.sortby = 'comp_name';
+										var auto = $interval(function() {
+											$http({
+												method:'get',
+												url:'../php/view_Comp.php',
+											})
+												.success(function(data) {
+													//console.log(data);
+												$scope.comps = data;
+											})
+										},500)
+										$scope.UpdateComp = function(name,cost) {
+											$scope.comp_name = name;
+											$scope.cost = cost;
+											$scope.Update = true;
+										}
+
+										$scope.updateData = function() {
+											$http({
+												method:'post',
+												url:'../php/update_comp.php',
+												data: {'comp_name':$scope.comp_name,'cost':$scope.cost}
+											})
+											.success(function(data) {
+												alert(data);
+											})
+											$scope.Update = false;
+										}
+
+										$scope.sortItem = function(xyz) {
+											if (xyz == $scope.sortby) {
+												$scope.reverseSort = !$scope.reverseSort;
+											}
+											$scope.sortby = xyz;
+										}
 									})
 
 
