@@ -1,0 +1,21 @@
+<div class="modal fade" id="addCompModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:90%" ng-controller="addComponents">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Components</h4>
+      </div>
+      <div class="modal-body">
+        <label for="name"><b>Component's Name</b></label><br>
+        <input type="text" placeholder="Enter Name of Component" name="name" required ng-model="compName"><br>
+        <label for="uname"><b>Component's Cost</b></label><br>
+        <input type="text" placeholder="Enter Component's Cost" name="cost" required ng-model="compCost"><br>
+      </div>
+      <div class="modal-footer">
+        <p>&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p>
+        <button type="submit" class="button1" ng-click=addCompNew() data-dismiss="modal" style="border-radius: 10px;">Add Component</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

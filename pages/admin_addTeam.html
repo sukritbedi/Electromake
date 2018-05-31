@@ -1,0 +1,31 @@
+<div class="modal fade" id="addTeamModal" role="dialog" ng-controller="addUser">
+  <div class="modal-dialog">
+    <div class="modal-content" style="margin-left: 0px;margin-right: 0px;width:100%;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Teams</h4>
+      </div>
+      <div class="modal-body">
+        <label for="uname"><b>Username</b></label><br>
+        <input type="text" placeholder="Enter Username" ng-model="user_id" required><br>
+
+        <label for="psw"><b>Password</b></label><br>
+        <input type="password" placeholder="Enter Password" ng-model="user_password" required><br>
+
+        <label for="name"><b>Team Leader's Name</b></label><br>
+        <input type="text" placeholder="Enter Name of Team Leader" ng-model = "team_leader" required><br>
+
+        <label for="num"><b>Team Members</b></label><br>
+        <input type="text" placeholder="Enter number of Team Members( including Team Leader )" ng-model="memberNum" required><br>
+
+        <label for="phnum"><b>Phone Number</b></label><br>
+        <input type="text" placeholder="Enter a WhatsApp number of any TeamMate" ng-model="phoneNum" required><br>
+      </div>
+      <div class="modal-footer">
+        <p>&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p><br>
+        <button type="submit" class="button1" ng-click="addTeamNew()" data-dismiss="modal" style="border-radius: 10px;">Add Team</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>  

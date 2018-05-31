@@ -1,0 +1,23 @@
+<div class="modal fade" id="changePassword" role="dialog" ng-controller='chngPswrd'>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="margin-left:auto; margin-right:auto; width:65%;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Change Password</h4>
+      </div>
+      <div class="modal-body">
+        <label for="sel1">Select list (select one):</label>
+        <select class="form-control" ng-model="sel1">
+          <option ng-repeat="user in  users">{{user.user_id}}</option>
+        </select><br><br>
+        <label>Add New Password: </label><br>
+        <input type="text" placeholder="Enter New Password" ng-model="pass_change">
+      </div>
+      <div class="modal-footer">
+        <p>&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p>
+        <input type="submit" name="btnInsert" class="btn btn-info" ng-click="changePass(sel1,pass_change)"  data-dismiss="modal">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

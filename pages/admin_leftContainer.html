@@ -1,0 +1,12 @@
+<div class="col-md-3">
+  <div class="logo">
+    <h1>ISA Electromake</h1>
+    <h2>Admin Page</h2>
+  </div>
+  <div class="teamName" id="teams" ng-controller="GetUsers">
+    <h4><b><u>User ID's</u></b></h4>
+    <li ng-repeat="user in users" ng-click="teamview(user.user_id,user.user_pass,user.team_name,user.money,user.team_members,user.phone_num)">
+      {{user.user_id}}
+    </li>
+  </div>
+</div>

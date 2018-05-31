@@ -1,15 +1,24 @@
 var app = angular.module('myApp',[])
-								 .controller('GetUsers',function($scope,$http,$interval,$window){
 
-									  var auto = $interval(function() {
-											$http.get('../php/view_Team.php')
-	         							.success(function(data) {
-					  						$scope.users = data;
-						 					})
-									  },100);
+								 .controller('Details',function($rootScope,$scope,$http){
+									 $http.get('../php/view_Team.php').then(function(response) {
+									 	console.log(response.data);
+										$rootScope.DetailsU = response.data;
+									 })
+									 $http.get('../php/view_Comp.php').then(function(response) {
+									 	console.log(response.data);
+										$rootScope.DetailsC = response.data;
+									 })
+								 })
+
+								 .controller('GetUsers',function($scope,$interval,$rootScope){
+									 $interval(GetUsers1, 800);
+									 function GetUsers1() {
+									 	$scope.users = $rootScope.DetailsU
+									 }
 								})
 
-								.controller('addUser',function($scope,$http) {
+								.controller('addUser',function($scope,$http,$rootScope) {
 									 $scope.addTeamNew = function() {
 										 console.log('1234')
 									 		$http({
@@ -19,19 +28,26 @@ var app = angular.module('myApp',[])
 											})
 											.success(function(data) {
 												console.log(data);
-												alert(data);
+												alert(data)
+												$http.get('../php/view_Team.php')
+												.then(function(response) {
+		 									 	console.log(response.data);
+		 										$rootScope.DetailsU = response.data;
+												$scope.user_id="";
+												$scope.user_password="";
+												$scope.team_leader="";
+												$scope.memberNum="";
+												$scope.phoneNum="";
+		 									 })
 											})
 									 }
 								})
 
-								.controller('removeUser', function($scope,$http,$interval){
-									var auto = $interval(function() {
-										$http.get('../php/view_Team.php')
-											.success(function(data) {
-											$scope.users = data;
-										})
-									},2000);
-
+								.controller('removeUser', function($scope,$http,$rootScope,$interval){
+									$interval(GetUsers1, 800);
+									function GetUsers1() {
+									 $scope.users = $rootScope.DetailsU
+									}
 									$scope.deleteTeam = function(user_id){
 										console.log(user_id);
 										$http({
@@ -41,23 +57,25 @@ var app = angular.module('myApp',[])
 										})
 										.success(function(data) {
 											alert(data);
+											$http.get('../php/view_Team.php')
+											.then(function(response) {
+												console.log(response.data);
+												$rootScope.DetailsU = response.data;
+										 })
 										})
 									}
 								})
 
-								.controller('updateUser', function($scope,$http,$interval){
+								.controller('updateUser', function($scope,$http,$interval,$rootScope){
 									$scope.Update = false;
 									$scope.reverseSort = false;
 									$scope.sortby = 'user_id';
-									var auto = $interval(function() {
-										$http({
-											method:'get',
-											url:'../php/view_Team.php',
-										})
-											.success(function(data) {
-											$scope.users = data;
-										})
-									},500)
+
+									$interval(GetUsers1, 800);
+									function GetUsers1() {
+									 $scope.users = $rootScope.DetailsU
+									}
+
 									$scope.UpdateTeam = function(user_id,team_name,money,team_members,phone_num) {
 										$scope.userid = user_id;
 										$scope.teamname = team_name;
@@ -75,7 +93,14 @@ var app = angular.module('myApp',[])
 										})
 										.success(function(data) {
 											alert(data);
+											$http.get('../php/view_Team.php')
+											.then(function(response) {
+												console.log(response.data);
+												$rootScope.DetailsU = response.data;
+										 })
+
 										})
+
 										$scope.Update = false;
 									}
 
@@ -88,12 +113,11 @@ var app = angular.module('myApp',[])
 								})
 
 
-								.controller('chngPswrd', function($scope,$http,$interval) {
-									$http.get('../php/view_Team.php')
-										.success(function(data) {
-										//console.log(data);
-										$scope.users = data;
-									})
+								.controller('chngPswrd', function($scope,$http,$interval,$rootScope) {
+									$interval(GetUsers1, 800);
+									function GetUsers1() {
+									 $scope.users = $rootScope.DetailsU
+									}
 
 									$scope.changePass = function(team,pass) {
 										$scope.team_name = team;
@@ -105,12 +129,17 @@ var app = angular.module('myApp',[])
 										})
 										.success(function(data){
 											alert(data);
+											$http.get('../php/view_Team.php')
+											.then(function(response) {
+												console.log(response.data);
+												$rootScope.DetailsU = response.data;
+										 })
 										})
 									}
 								})
 
 
-								.controller('addComponents', function($scope,$http) {
+								.controller('addComponents', function($scope,$http,$rootScope) {
 										$scope.addCompNew = function() {
 											 $http({
 												 method:'post',
@@ -119,35 +148,32 @@ var app = angular.module('myApp',[])
 											 })
 											 .success(function(data) {
 												 alert(data);
+												 $http.get('../php/view_Comp.php')
+ 												.then(function(response) {
+ 													console.log(response.data);
+ 													$rootScope.DetailsC = response.data;
+												})
 											 })
 										}
 									})
 
 
-									.controller('viewComp', function($scope,$http,$interval) {
-										var auto = $interval(function(){
-											$http.get('../php/view_Comp.php')
-											.success(function(data) {
-												$scope.components = data;
-											})
-										}
-									)
+									.controller('viewComp', function($scope,$interval,$rootScope) {
+										$interval(GetUsers1, 800);
+ 									 function GetUsers1() {
+ 									 	$scope.comps = $rootScope.DetailsC
+ 									 }
 									})
 
-									.controller('updateComp', function($scope,$http,$interval){
+									.controller('updateComp', function($scope,$http,$interval,$rootScope){
 										$scope.Update = false;
 										$scope.reverseSort = false;
 										$scope.sortby = 'comp_name';
-										var auto = $interval(function() {
-											$http({
-												method:'get',
-												url:'../php/view_Comp.php',
-											})
-												.success(function(data) {
-													//console.log(data);
-												$scope.comps = data;
-											})
-										},500)
+
+										$interval(GetUsers1, 800);
+ 									 function GetUsers1() {
+ 									 	$scope.comps = $rootScope.DetailsC
+ 									 }
 										$scope.UpdateComp = function(name,cost) {
 											$scope.comp_name = name;
 											$scope.cost = cost;
@@ -162,6 +188,11 @@ var app = angular.module('myApp',[])
 											})
 											.success(function(data) {
 												alert(data);
+												$http.get('../php/view_Comp.php')
+												.then(function(response) {
+													console.log(response.data);
+													$rootScope.DetailsC = response.data;
+											 })
 											})
 											$scope.Update = false;
 										}
@@ -175,13 +206,11 @@ var app = angular.module('myApp',[])
 									})
 
 
-									.controller('removeComp', function($scope,$http,$interval){
-										var auto = $interval(function() {
-											$http.get('../php/view_Comp.php')
-												.success(function(data) {
-												$scope.components = data;
-											})
-										},2000);
+									.controller('removeComp', function($scope,$http,$rootScope,$interval){
+										$interval(GetUsers1, 800);
+										function GetUsers1() {
+											$scope.comps = $rootScope.DetailsC
+										}
 
 										$scope.deleteComp = function(comp_name){
 											$http({
@@ -191,6 +220,11 @@ var app = angular.module('myApp',[])
 											})
 											.success(function(data) {
 												alert(data);
+												$http.get('../php/view_Comp.php')
+												.then(function(response) {
+													console.log(response.data);
+													$rootScope.DetailsC = response.data;
+												})
 											})
 										}
 									});
