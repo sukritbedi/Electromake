@@ -1,86 +1,39 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-	</head>
-	<body>
-		<link rel="stylesheet" type="text/css" href="../css/login.css">
-		<script type="text/javascript" src="../js/login.js"></script>
-		<h2>ISA Login Form</h2>
+  <!DOCTYPE html>
+<html lang="en" dir="ltr" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <script type="text/javascript" src="../../js/admin.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
+    <script src="../../js/angular_admin.js"></script>
 
-		<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
-
-		<div id="id01" class="modal">
-
-			<form class="modal-content animate" action="/action_page.php">
-
-				<div class="imgcontainer">
-		    		<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-		    		<img src="../img/img_avatar2.png" alt="Avatar" class="avatar">
-		    </div>
-
-	    	<div class="container">
-	    		<label for="uname"><b>Username</b></label>
-	    		<input type="text" placeholder="Enter Username" name="uname" required>
-
-	    		<label for="psw"><b>Password</b></label>
-	    		<input type="password" placeholder="Enter Password" name="psw" required>
-
-	    		<button type="submit">Login</button>
-	    		<label>
-	    			<input type="checkbox" checked="checked" name="remember"> Remember me
-	    		</label>
-	    	</div>
-
-		    <div class="container" style="background-color:#f1f1f1">
-					<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-					<button type="button" onclick="forgotPass()" class="fpbtn">Forgot password?</button>
-					<button type="button" onclick="signupOpen()" class="nSbtn">New SignUp</button>
-				</div>
-			</form>
-		</div>
-
-		<div id="id02" class="modal">
-			<form class="modal-content animate" action="/signup.php">
-				<div class="imgcontainer">
-		    	<span onclick="signupCloseLoginOpen()" class="close" title="Close Modal">&times;</span>
-		    	<img src="../img/img_avatar2.png" alt="Avatar" class="avatar">
-		    </div>
-
-				<div class="container">
-
-					<label for="fname"><b>First Name</b></label>
-					<input type="text" placeholder="Enter First Name" name="fname" required>
-
-					<label for="fname"><b>Last Name</b></label>
-					<input type="text" placeholder="Enter Last Name" name="lname" required>
-
-					<label for="uname"><b>Username</b></label>
-					<input type="text" placeholder="Enter Username" name="uname" required>
-
-					<button class="chAvail" onclick="checkAvailability()">Check Availability</button>
-						<text id="chAv">Available</text>
-						<br>
-
-					<label for="psw1"><b>Password</b></label>
-					<input type="password" placeholder="Enter Password" name="psw1" required>
-
-					<label for="psw2"><b>Retype Password</b></label>
-					<input type="password" placeholder="Enter your Password Again" name="psw2" required>
-
-					<button type="submit">Sign Up</button>
-				</div>
-			</form>
-		</div>
-		<div id="id03" class="modal">
-			<form class="modal-content animate">
-				<div class="imgcontainer">
-					<div class="container">
-						<span onclick="forgotPassClose()" class="close" title="Close Modal">&times;</span>
-						<p>Please contact the help desk for this problem.</p>
-					</div>
-				</div>
-			</form>
-		</div>
-	</body>
+    <title></title>
+  </head>
+  <body  ng-controller="Details">
+    <div class="container-fluid">
+      <div ng-include="'admin_leftContainer.html'"></div>
+      <div ng-include="'admin_buttonContainer.html'"></div>
+      <div ng-include="'admin_addTeam.html'"></div>
+      <div ng-include="'admin_updateTeam.html'"></div>
+      <div ng-include="'admin_removeTeam.html'"></div>
+      <div ng-include="'admin_changePass.html'"></div>
+      <div ng-include="'admin_addComp.html'"></div>
+      <div ng-include="'admin_viewComp.html'"></div>
+      <div ng-include="'admin_updateComp.html'"></div>
+      <div ng-include="'admin_removeComp.html'"></div>
+      <div ng-include="'admin_addMCQ.html'"></div>
+      <div ng-include="'admin_viewMCQ.html'"></div>
+      <div ng-include="'admin_updateMCQ.html'"></div>
+      <div ng-include="'admin_removeMCQ.html'"></div>
+      <div ng-include="'admin_addQues.html'"></div>
+      <div ng-include="'admin_viewQues.html'"></div>
+      <div ng-include="'admin_removeQues.html'"></div>
+      <div ng-include="'admin_updateQues.html'"></div>
+    </div>
+    <br><br><br><br><br>
+    <p style="text-align:center;">&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p>
+  </body>
 </html>

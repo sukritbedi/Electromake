@@ -1,18 +1,38 @@
 <div class="col-md-9">
-  <button type="button" class="btn btn-success btn-lg buttonAdmin" data-toggle="modal" data-target="#addTeamModal">Add Team</button>
-  <button type="button" class="btn btn-primary btn-lg buttonAdmin" data-toggle="modal" data-target="#updateTeamModal">Update Team</button><br>
-  <button type="button" class="btn btn-danger btn-lg buttonAdmin" data-toggle="modal" data-target="#removeTeamModal">Remove Team</button>
   <div class="dropdown" style="top: 64px; left: 113px;">
-    <button class="btn dropbtn buttonAdmin btn-lg">Components</button>
+    <button class="btn btn-info btn-lg">Teams</button>
     <div class="dropdown-content">
-      <span data-toggle="modal" data-target="#viewCompModal">View Components</span>
+      <span data-toggle="modal" data-target="#addTeamModal">Add Team</span>
+      <span data-toggle="modal" data-target="#updateTeamModal">Update Team</span>
+      <span data-toggle="modal" data-target="#removeTeamModal">Remove Team</span>
+      <span data-toggle="modal" data-target="#changePassword">Change Password</span>
+    </div>
+  </div>
+  <div class="dropdown" style="top: 64px; left: 113px;">
+    <button class="btn btn-warning btn-lg">Components</button>
+    <div class="dropdown-content">
       <span data-toggle="modal" data-target="#addCompModal">Add Components</span>
+      <span data-toggle="modal" data-target="#viewCompModal">View Components</span>
       <span data-toggle="modal" data-target="#updateCompModal">Update Components</span>
       <span data-toggle="modal" data-target="#remCompModal">Remove Components</span>
     </div>
-  </div><br>
-  <button type="button" class="btn btn-warning btn-lg buttonAdmin" data-toggle="modal" data-target="#changePassword">Change Password</button>
-  <span ng-click=teamview(user.user_id)>{{ user.team_name }}</span>
-  <br><br><br><br><p>&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p>
-</div>
+  </div><br><br>
+  <div class="dropdown" style="top: 64px; left: 113px;">
+    <button class="btn btn-success btn-lg">MCQs</button>
+    <div class="dropdown-content">
+      <span data-toggle="modal" data-target="#addMCQModal">Add MCQ</span>
+      <span data-toggle="modal" data-target="#viewMCQModal">View MCQ</span>
+      <span data-toggle="modal" data-target="#updateMCQModal">Update MCQ</span>
+      <span data-toggle="modal" data-target="#removeMCQModal">Remove MCQ</span>
+    </div>
+  </div>
+  <div class="dropdown" style="top: 64px; left: 113px;">
+    <button class="btn btn-primary btn-lg">Questions</button>
+    <div class="dropdown-content">
+      <span data-toggle="modal" data-target="#addQuesModal">Add Question</span>
+      <span data-toggle="modal" data-target="#viewQuesModal">View Question</span>
+      <span data-toggle="modal" data-target="#updateQuesQModal">Update Question</span>
+      <span data-toggle="modal" data-target="#removeQuesModal">Remove Question</span>
+    </div>
+  </div>
 </div>

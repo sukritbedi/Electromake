@@ -1,0 +1,28 @@
+<div class="modal fade" id="addQuesModal" role="dialog" ng-controller="addQues">
+  <div class="modal-dialog">
+    <div class="modal-content" style="margin-left: 0px;margin-right: 0px;width:100%;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add MCQ Questions</h4>
+      </div>
+      <div class="modal-body" novalidate>
+        <label>Question</b></label><br>
+        <input type="text" placeholder="Enter Question" ng-model="ques" class="ng-pristine ng-invalid ng-invalid-requied" ><br>
+
+        <label><b>Image</b></label><br>
+        <input type="checkbox" value="1" ng-model="chbox">
+        <p ng-hide = "chbox">Select to add Image</p>
+        <p ng-show = "chbox">Select to remove Image</p>
+        <input type="text" placeholder="Enter the name of image file" ng-model="imgsrc" ng-show="chbox">
+
+        <br><label><b>Cost</b></label><br>
+        <input type="text" placeholder="Enter the cost of Question" ng-model="cost" class="ng-pristine ng-invalid ng-invalid-requied"><br>
+      </div>
+      <div class="modal-footer">
+        <p>&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p><br>
+        <button type="submit" class="button1" ng-click="addQuesNew()" data-dismiss="modal" style="border-radius: 10px;">Add MCQ</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

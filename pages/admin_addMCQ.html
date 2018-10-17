@@ -1,0 +1,40 @@
+<div class="modal fade" id="addMCQModal" role="dialog" ng-controller="addMCQ">
+  <div class="modal-dialog">
+    <div class="modal-content" style="margin-left: 0px;margin-right: 0px;width:100%;">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add MCQ Questions</h4>
+      </div>
+      <div class="modal-body" novalidate>
+        <label>Question</b></label><br>
+        <input type="text" placeholder="Enter Question" ng-model="ques" class="ng-pristine ng-invalid ng-invalid-requied" ><br>
+
+        <label><b>Option A</b></label><br>
+        <input type="text" placeholder="Option A" ng-model="a" class="ng-pristine ng-invalid ng-invalid-requied"><br>
+
+        <label><b>Option B</b></label><br>
+        <input type="text" placeholder="Option B" ng-model="b" class="ng-pristine ng-invalid ng-invalid-requied"><br>
+
+        <label><b>Option C</b></label><br>
+        <input type="text" placeholder="Option C" ng-model="c" class="ng-pristine ng-invalid ng-invalid-requied"><br>
+
+        <label><b>Option D</b></label><br>
+        <input type="text" placeholder="Option D" ng-model="d" class="ng-pristine ng-invalid ng-invalid-requied"><br>
+
+        <label for="ans">Select correct Answer (select one):</label>
+        <select class="form-control" ng-model="ans">
+          <option>A</option>
+          <option>B</option>
+          <option>C</option>
+          <option>D</option>
+        </select>
+
+      </div>
+      <div class="modal-footer">
+        <p>&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p><br>
+        <button type="submit" class="button1" ng-click="addMCQNew()" data-dismiss="modal" style="border-radius: 10px;">Add MCQ</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

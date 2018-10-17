@@ -5,21 +5,21 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Add Teams</h4>
       </div>
-      <div class="modal-body">
-        <label for="uname"><b>Username</b></label><br>
-        <input type="text" placeholder="Enter Username" ng-model="user_id" required><br>
+      <div class="modal-body" novalidate>
+        <label for="unameab">Username</b></label><br>
+        <input type="text" placeholder="Enter Username" ng-model="user_id" class="ng-pristine ng-invalid ng-invalid-requied" ><br>
 
         <label for="psw"><b>Password</b></label><br>
-        <input type="password" placeholder="Enter Password" ng-model="user_password" required><br>
+        <input type="password" placeholder="Enter Password" ng-model="user_password" class="ng-pristine ng-invalid ng-invalid-requied"><br>
 
         <label for="name"><b>Team Leader's Name</b></label><br>
-        <input type="text" placeholder="Enter Name of Team Leader" ng-model = "team_leader" required><br>
+        <input type="text" placeholder="Enter Name of Team Leader" ng-model = "team_leader" class="ng-pristine ng-invalid ng-invalid-requied"><br>
 
         <label for="num"><b>Team Members</b></label><br>
-        <input type="text" placeholder="Enter number of Team Members( including Team Leader )" ng-model="memberNum" required><br>
+        <input type="text" placeholder="Enter number of Team Members( including Team Leader )" ng-model="memberNum" class="ng-pristine ng-invalid ng-invalid-requied"><br>
 
         <label for="phnum"><b>Phone Number</b></label><br>
-        <input type="text" placeholder="Enter a WhatsApp number of any TeamMate" ng-model="phoneNum" required><br>
+        <input type="text" placeholder="Enter a WhatsApp number of any Team Mate" ng-model="phoneNum" class="ng-pristine ng-invalid ng-invalid-requied"><br>
       </div>
       <div class="modal-footer">
         <p>&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p><br>
@@ -28,4 +28,4 @@
       </div>
     </div>
   </div>
-</div>  
+</div>

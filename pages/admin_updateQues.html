@@ -1,0 +1,51 @@
+<div class="modal fade" id="updateQuesModal" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="width:100%">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Update Quiz</h4>
+      </div>
+      <div class="modal-body" ng-controller="updateQues">
+        <div class="modal-body table-responsive">
+            <table class="table table-hover" ng-hide="Update">
+              <thead>
+                <th ng-click="sortItem('ques')">Question</th>
+                <th>Image</th>
+                <th ng-click="sortItem('ans')">Answer</th>
+                <th></th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="que in ques | orderBy:sortby:reverseSort">
+                  <td>{{que.ques}}</td>
+                  <td>{{que.imgsrc}}</td>
+                  <td>{{que.cost}}</td>
+                  <td><button type="button" class="btn btn-info btn-xs buttonAdmin" style="align:center;" ng-click="UpdateMcq(mcq.quiznum,mcq.ques,mcq.A,mcq.B,mcq.C,mcq.D,mcq.ans)">Update Question</button></td>
+                </tr>
+              </tbody>
+            </table>
+            <div ng-show="Update">
+              <label><b>Question Number</b></label><br>
+              <input type="text" name="compname" ng-model="index" class="form-control" disabled><br>
+              <label><b>Question</b></label><br>
+              <input type="text" name="compname" ng-model="question" class="form-control"><br>
+              <label><b>Option A</b></label><br>
+              <input type="text" name="cost" ng-model="a" class="form-control"><br>
+              <label><b>Option B</b></label><br>
+              <input type="text" name="cost" ng-model="b" class="form-control"><br>
+              <label><b>Option C</b></label><br>
+              <input type="text" name="cost" ng-model="c" class="form-control"><br>
+              <label><b>Option D</b></label><br>
+              <input type="text" name="cost" ng-model="d" class="form-control"><br>
+              <label><b>Answer</b></label><br>
+              <input type="text" name="cost" ng-model="ans" class="form-control"><br>
+              <input type="submit" name="btnInsert" class="btn btn-info" ng-click="updateData()">
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <p>&copy;     All rights reserved by International Society of Automation - VIT Vellore Student Section</p><br>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
